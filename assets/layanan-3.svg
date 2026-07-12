@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
+  <defs>
+    <radialGradient id="glow3" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FDC45C" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FDC45C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDC45C"/>
+      <stop offset="100%" stop-color="#FD8500"/>
+    </linearGradient>
+    <radialGradient id="shadow3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#080807" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#080807" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="spot3" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FDC45C" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#FDC45C" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="160" cy="150" r="140" fill="url(#glow3)"/>
+  <polygon points="130,20 190,20 224,150 96,150" fill="url(#spot3)"/>
+  <ellipse cx="160" cy="272" rx="100" ry="16" fill="url(#shadow3)"/>
+
+  <!-- screen stand -->
+  <rect x="150" y="210" width="20" height="36" fill="#080807"/>
+  <rect x="120" y="244" width="80" height="10" rx="5" fill="#080807"/>
+
+  <!-- screen frame -->
+  <rect x="60" y="70" width="200" height="140" rx="10" fill="#080807"/>
+  <rect x="72" y="82" width="176" height="116" rx="4" fill="#FCFCFB"/>
+
+  <!-- slide content: title bar -->
+  <rect x="84" y="94" width="90" height="10" rx="5" fill="url(#gold3)"/>
+  <rect x="84" y="110" width="60" height="6" rx="3" fill="#080807" opacity="0.35"/>
+
+  <!-- bar chart on slide -->
+  <rect x="84" y="150" width="14" height="34" rx="3" fill="url(#gold3)"/>
+  <rect x="104" y="134" width="14" height="50" rx="3" fill="#080807"/>
+  <rect x="124" y="160" width="14" height="24" rx="3" fill="url(#gold3)"/>
+  <rect x="144" y="142" width="14" height="42" rx="3" fill="#080807" opacity="0.75"/>
+
+  <!-- pie/donut on slide -->
+  <circle cx="205" cy="150" r="30" fill="none" stroke="#F1E7D6" stroke-width="14"/>
+  <path d="M205 120 A30 30 0 0 1 232 145" fill="none" stroke="url(#gold3)" stroke-width="14" stroke-linecap="round"/>
+  <path d="M232 145 A30 30 0 0 1 210 179" fill="none" stroke="#080807" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- laser pointer dot -->
+  <circle cx="128" cy="150" r="4" fill="#FD8500"/>
+
+  <!-- podium -->
+  <g transform="translate(20 190)">
+    <polygon points="0,50 14,0 40,0 46,50" fill="#080807"/>
+    <rect x="8" y="14" width="30" height="8" rx="3" fill="url(#gold3)"/>
+  </g>
+  <!-- microphone on podium -->
+  <g transform="translate(30 168)">
+    <rect x="0" y="0" width="8" height="20" rx="4" fill="url(#gold3)"/>
+    <circle cx="4" cy="-4" r="8" fill="#080807"/>
+  </g>
+
+  <!-- sparkles -->
+  <g fill="url(#gold3)">
+    <path d="M270 92 l4 12 12 4 -12 4 -4 12 -4 -12 -12 -4 12 -4 z"/>
+    <path d="M40 96 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z"/>
+  </g>
+  <circle cx="252" cy="220" r="5" fill="#FDC45C"/>
+  <circle cx="272" cy="180" r="4" fill="#FDC45C"/>
+</svg>

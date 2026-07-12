@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
+  <defs>
+    <radialGradient id="glow5" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#FDC45C" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FDC45C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDC45C"/>
+      <stop offset="100%" stop-color="#FD8500"/>
+    </linearGradient>
+    <radialGradient id="shadow5" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#080807" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#080807" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="160" cy="150" r="140" fill="url(#glow5)"/>
+  <ellipse cx="160" cy="272" rx="95" ry="16" fill="url(#shadow5)"/>
+
+  <!-- monitor -->
+  <rect x="150" y="220" width="20" height="24" fill="#080807"/>
+  <rect x="122" y="244" width="76" height="10" rx="5" fill="#080807"/>
+  <rect x="52" y="66" width="216" height="150" rx="10" fill="#080807"/>
+  <rect x="64" y="78" width="192" height="126" rx="5" fill="#FCFCFB"/>
+
+  <!-- scatter plot axes -->
+  <line x1="82" y1="98" x2="82" y2="182" stroke="#080807" stroke-width="2" opacity="0.5"/>
+  <line x1="82" y1="182" x2="180" y2="182" stroke="#080807" stroke-width="2" opacity="0.5"/>
+  <!-- regression line -->
+  <line x1="86" y1="176" x2="176" y2="104" stroke="url(#gold5)" stroke-width="4" stroke-linecap="round"/>
+  <!-- scatter dots -->
+  <circle cx="96" cy="168" r="4" fill="#080807"/>
+  <circle cx="110" cy="150" r="4" fill="url(#gold5)"/>
+  <circle cx="122" cy="158" r="4" fill="#080807"/>
+  <circle cx="136" cy="132" r="4" fill="url(#gold5)"/>
+  <circle cx="150" cy="140" r="4" fill="#080807"/>
+  <circle cx="162" cy="116" r="4" fill="url(#gold5)"/>
+  <circle cx="170" cy="108" r="4" fill="#080807"/>
+
+  <!-- mini data table -->
+  <g transform="translate(190 100)">
+    <rect x="0" y="0" width="58" height="70" rx="4" fill="#F1E7D6"/>
+    <rect x="0" y="0" width="58" height="14" rx="4" fill="url(#gold5)"/>
+    <line x1="0" y1="28" x2="58" y2="28" stroke="#080807" stroke-width="1" opacity="0.3"/>
+    <line x1="0" y1="42" x2="58" y2="42" stroke="#080807" stroke-width="1" opacity="0.3"/>
+    <line x1="0" y1="56" x2="58" y2="56" stroke="#080807" stroke-width="1" opacity="0.3"/>
+    <line x1="29" y1="14" x2="29" y2="70" stroke="#080807" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <!-- headphones + waveform (transcript) -->
+  <g transform="translate(30 190)">
+    <path d="M4 32 Q4 -4 40 -4 Q76 -4 76 32" fill="none" stroke="#080807" stroke-width="6" stroke-linecap="round"/>
+    <rect x="-2" y="26" width="14" height="22" rx="6" fill="url(#gold5)"/>
+    <rect x="68" y="26" width="14" height="22" rx="6" fill="url(#gold5)"/>
+    <rect x="30" y="46" width="4" height="14" fill="#080807" opacity="0.6"/>
+    <rect x="38" y="38" width="4" height="22" fill="#080807" opacity="0.8"/>
+    <rect x="46" y="44" width="4" height="16" fill="#080807" opacity="0.6"/>
+    <rect x="54" y="34" width="4" height="26" fill="#080807" opacity="0.8"/>
+  </g>
+
+  <!-- doc conversion tags -->
+  <g transform="translate(206 210)">
+    <rect x="0" y="0" width="34" height="34" rx="6" fill="#080807"/>
+    <text x="17" y="22" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#FDC45C" text-anchor="middle">DOC</text>
+    <path d="M38 17 L52 17" stroke="url(#gold5)" stroke-width="3" marker-end="url(#arrow5)"/>
+    <rect x="56" y="0" width="34" height="34" rx="6" fill="url(#gold5)"/>
+    <text x="73" y="22" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#080807" text-anchor="middle">PDF</text>
+  </g>
+  <defs>
+    <marker id="arrow5" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#FD8500"/>
+    </marker>
+  </defs>
+
+  <!-- sparkles -->
+  <g fill="url(#gold5)">
+    <path d="M270 76 l4 12 12 4 -12 4 -4 12 -4 -12 -12 -4 12 -4 z"/>
+    <path d="M30 96 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z"/>
+  </g>
+  <circle cx="252" cy="240" r="5" fill="#FDC45C"/>
+</svg>
