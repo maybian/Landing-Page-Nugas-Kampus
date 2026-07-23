@@ -710,11 +710,12 @@ section { position: relative; padding: 70px 0; }
 .cta {
   margin: 30px 20px;
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--black) 0%, #201d1a 100%);
-  color: var(--cream);
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+  color: var(--black);
   overflow: hidden;
   /* Keeps the decorative balls (z-index 0) from bleeding over the card. */
   z-index: 1;
+  box-shadow: 0 20px 45px rgba(253, 133, 0, 0.28);
 }
 
 .cta-inner {
@@ -723,13 +724,13 @@ section { position: relative; padding: 70px 0; }
 }
 
 .cta h2 {
-  color: var(--cream);
+  color: var(--black);
   font-size: clamp(1.5rem, 4vw, 2.1rem);
   margin-bottom: 12px;
 }
 
 .cta p {
-  color: rgba(252,252,251,0.75);
+  color: rgba(8, 8, 7, 0.72);
   margin-bottom: 26px;
 }
 
@@ -743,8 +744,8 @@ section { position: relative; padding: 70px 0; }
 
 /* ============ FOOTER ============ */
 .site-footer {
-  background: var(--black);
-  color: var(--cream);
+  background: var(--cream-dim);
+  color: var(--black);
   padding-top: 50px;
   position: relative;
   z-index: 1;
@@ -755,7 +756,7 @@ section { position: relative; padding: 70px 0; }
   grid-template-columns: 1fr;
   gap: 30px;
   padding-bottom: 40px;
-  border-bottom: 1px solid rgba(252,252,251,0.12);
+  border-bottom: 1px solid rgba(8, 8, 7, 0.12);
 }
 
 @media (min-width: 800px) {
@@ -770,7 +771,7 @@ section { position: relative; padding: 70px 0; }
 
 .footer-brand p {
   font-size: 0.88rem;
-  color: rgba(252,252,251,0.6);
+  color: rgba(8, 8, 7, 0.62);
   max-width: 320px;
 }
 
@@ -781,19 +782,19 @@ section { position: relative; padding: 70px 0; }
   font-size: 0.9rem;
 }
 .footer-social span {
-  color: rgba(252,252,251,0.5);
+  color: rgba(8, 8, 7, 0.5);
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
-.footer-social a { color: var(--cream); }
-.footer-social a:hover { color: var(--gold-light); }
+.footer-social a { color: var(--black); }
+.footer-social a:hover { color: var(--gold); }
 
 .footer-bottom {
   text-align: center;
   padding: 22px 0;
   font-size: 0.82rem;
-  color: rgba(252,252,251,0.45);
+  color: rgba(8, 8, 7, 0.5);
 }
 
 /* ============ SCROLL REVEAL ============ */
