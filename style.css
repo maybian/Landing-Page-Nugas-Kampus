@@ -358,6 +358,7 @@ section { position: relative; padding: 70px 0; }
 
 .hero-img {
   width: 100%;
+  height: auto;
   /* Bagian bawah memudar supaya potongan kaki tidak terlihat keputus */
   -webkit-mask-image: linear-gradient(to bottom, #000 66%, transparent 97%);
   mask-image: linear-gradient(to bottom, #000 66%, transparent 97%);
