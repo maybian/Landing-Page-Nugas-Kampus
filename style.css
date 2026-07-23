@@ -338,11 +338,29 @@ section { position: relative; padding: 70px 0; }
   position: relative;
   width: 100%;
   max-width: 340px;
+  z-index: 1;
+}
+
+/* Highlight cahaya emas di bawah figur, jadi kaki yang terpotong melebur ke sini */
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 3%;
+  transform: translateX(-50%);
+  width: 94%;
+  height: 40%;
+  background: radial-gradient(ellipse at 50% 62%, rgba(253, 133, 0, 0.5) 0%, rgba(253, 133, 0, 0.18) 42%, transparent 72%);
+  filter: blur(6px);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .hero-img {
   width: 100%;
-  filter: drop-shadow(0 25px 35px rgba(8,8,7,0.22));
+  /* Bagian bawah memudar supaya potongan kaki tidak terlihat keputus */
+  -webkit-mask-image: linear-gradient(to bottom, #000 66%, transparent 97%);
+  mask-image: linear-gradient(to bottom, #000 66%, transparent 97%);
 }
 
 /* Desktop: text block and action block stack in the left column, hugging the
