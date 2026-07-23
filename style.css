@@ -632,6 +632,66 @@ section { position: relative; padding: 70px 0; }
 .testi-dot.is-active { background: var(--gold); transform: scale(1.25); }
 
 /* ============ CTA ============ */
+/* ============ DIDUKUNG TOOLS ============ */
+.tools { background: var(--cream); }
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.tool-tile {
+  height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 22px;
+  background: #fff;
+  border: 1px solid rgba(8, 8, 7, 0.06);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tool-tile img {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+  /* Abu-abu saat diam, berwarna penuh saat disorot: gaya strip "trusted by" */
+  filter: grayscale(1);
+  opacity: 0.66;
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+.tool-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.tool-tile:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.tools-note {
+  text-align: center;
+  margin-top: 26px;
+  font-size: 0.82rem;
+  color: rgba(8, 8, 7, 0.5);
+}
+
+@media (max-width: 860px) {
+  .tools-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 520px) {
+  .tools-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .tool-tile { height: 74px; padding: 12px 14px; }
+  .tool-tile img { max-height: 30px; }
+}
+
 .cta {
   margin: 30px 20px;
   border-radius: var(--radius-lg);
