@@ -635,40 +635,64 @@ section { position: relative; padding: 70px 0; }
 /* ============ DIDUKUNG TOOLS ============ */
 .tools { background: var(--cream); }
 
-/* Satu strip abu-abu panjang sebagai highlight, tanpa kotak putih per logo */
+/* Strip abu-abu panjang, logo berjalan otomatis (marquee) */
 .tools-strip {
   background: #ECEAE6;
   border-radius: var(--radius-lg);
   max-width: 1040px;
   margin: 0 auto;
-  padding: 40px 36px;
+  padding: 34px 0;
+  overflow: hidden;
 }
 
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 34px 26px;
-  align-items: center;
-  justify-items: center;
+.marquee {
+  overflow: hidden;
+  /* logo memudar halus di tepi kiri dan kanan */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
+.marquee + .marquee { margin-top: 30px; }
 
-.tools-grid li {
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+/* baris atas: geser kiri ke kanan; baris bawah: kanan ke kiri */
+.marquee-ltr { animation: marquee-ltr 38s linear infinite; }
+.marquee-rtl { animation: marquee-rtl 38s linear infinite; }
+
+/* berhenti saat disorot supaya logo bisa dilihat dan di-hover */
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+.marquee-set {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 60px;
+  padding-left: 60px;
+  margin: 0;
 }
+.marquee-set li { flex: 0 0 auto; display: flex; align-items: center; }
 
-.tools-grid img {
+.marquee-set img {
   max-height: 44px;
-  max-width: 100%;
   width: auto;
   object-fit: contain;
-  /* Logo membesar halus saat disorot */
   transition: transform 0.22s ease;
 }
+.marquee-set img:hover { transform: scale(1.22); }
 
-.tools-grid img:hover {
-  transform: scale(1.18);
+@keyframes marquee-ltr {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+@keyframes marquee-rtl {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* hormati pengguna yang mematikan animasi */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
 }
 
 .tools-note {
@@ -678,13 +702,9 @@ section { position: relative; padding: 70px 0; }
   color: rgba(8, 8, 7, 0.5);
 }
 
-@media (max-width: 860px) {
-  .tools-grid { grid-template-columns: repeat(4, 1fr); gap: 30px 22px; }
-}
 @media (max-width: 520px) {
-  .tools-strip { padding: 28px 18px; }
-  .tools-grid { grid-template-columns: repeat(3, 1fr); gap: 24px 16px; }
-  .tools-grid img { max-height: 34px; }
+  .marquee-set { gap: 42px; padding-left: 42px; }
+  .marquee-set img { max-height: 34px; }
 }
 
 .cta {
