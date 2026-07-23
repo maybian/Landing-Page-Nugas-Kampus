@@ -96,7 +96,11 @@ function setupTestimonials() {
     { img: 'assets/testi-4.jpg', cap: 'Harga Pas · Kantong Aman' },
     { img: 'assets/testi-5.jpg', cap: 'PPT Sidang · Desain Kece' },
     { img: 'assets/testi-6.jpg', cap: 'Olah Data Statistik' },
-    { img: 'assets/testi-7.jpg', cap: 'Hasil Sesuai · Referensi Aman' }
+    { img: 'assets/testi-7.jpg', cap: 'Hasil Sesuai · Referensi Aman' },
+    { img: 'assets/testi-8.jpg', cap: 'Hasil Sesuai Request · Format Rapi' },
+    { img: 'assets/testi-9.jpg', cap: 'Chat Senin, Selasa Kelar' },
+    { img: 'assets/testi-10.jpg', cap: 'Skripsi ACC · Lolos Sidang' },
+    { img: 'assets/testi-11.jpg', cap: 'Admin Fast Respon · Harga Terjangkau' }
   ];
   // ==========================
 
