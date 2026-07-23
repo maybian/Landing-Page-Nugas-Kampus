@@ -710,15 +710,13 @@ section { position: relative; padding: 70px 0; }
 .cta {
   margin: 30px 20px;
   border-radius: var(--radius-lg);
-  /* Hitam dengan cahaya emas memancar dari pojok kanan atas */
-  background:
-    radial-gradient(85% 120% at 100% 0%, rgba(253, 133, 0, 0.9) 0%, rgba(253, 133, 0, 0.28) 24%, rgba(8, 8, 7, 0) 52%),
-    linear-gradient(135deg, #211d19 0%, var(--black) 60%);
-  color: var(--cream);
+  background: #fff;
+  color: var(--black);
+  border: 1.5px solid rgba(8, 8, 7, 0.1);
   overflow: hidden;
   /* Keeps the decorative balls (z-index 0) from bleeding over the card. */
   z-index: 1;
-  box-shadow: 0 20px 45px rgba(8, 8, 7, 0.25);
+  box-shadow: var(--shadow-soft);
 }
 
 .cta-inner {
@@ -727,13 +725,13 @@ section { position: relative; padding: 70px 0; }
 }
 
 .cta h2 {
-  color: var(--cream);
+  color: var(--black);
   font-size: clamp(1.5rem, 4vw, 2.1rem);
   margin-bottom: 12px;
 }
 
 .cta p {
-  color: rgba(252, 252, 251, 0.75);
+  color: rgba(8, 8, 7, 0.65);
   margin-bottom: 26px;
 }
 
