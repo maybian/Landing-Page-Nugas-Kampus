@@ -790,8 +790,14 @@ section { position: relative; padding: 70px 0; }
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
-.footer-social a { color: var(--black); }
+.footer-social a {
+  color: var(--black);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
 .footer-social a:hover { color: var(--gold); }
+.social-ico { width: 20px; height: 20px; flex-shrink: 0; }
 
 .footer-bottom {
   text-align: center;
