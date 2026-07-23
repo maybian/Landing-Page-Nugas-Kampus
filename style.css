@@ -727,16 +727,19 @@ section { position: relative; padding: 70px 0; }
 }
 
 .cta {
-  margin: 30px 20px;
+  margin: 40px 20px;
   border-radius: var(--radius-lg);
-  /* Krem hangat lembut dengan bingkai emas biar tegas tapi tidak kontras keras */
-  background: linear-gradient(135deg, #FFFDFA 0%, #FFF4E2 100%);
-  color: var(--black);
-  border: 2px solid var(--gold);
+  /* Kotak gelap dengan cahaya oranye memancar dari pinggir */
+  background: linear-gradient(135deg, #24201b 0%, var(--black) 70%);
+  color: var(--cream);
+  border: 1.5px solid rgba(253, 133, 0, 0.45);
   overflow: hidden;
   /* Keeps the decorative balls (z-index 0) from bleeding over the card. */
   z-index: 1;
-  box-shadow: var(--shadow-card);
+  box-shadow:
+    0 0 45px rgba(253, 133, 0, 0.5),
+    0 0 100px rgba(253, 133, 0, 0.3),
+    0 18px 40px rgba(8, 8, 7, 0.25);
 }
 
 .cta-inner {
@@ -745,13 +748,13 @@ section { position: relative; padding: 70px 0; }
 }
 
 .cta h2 {
-  color: var(--black);
+  color: var(--cream);
   font-size: clamp(1.5rem, 4vw, 2.1rem);
   margin-bottom: 12px;
 }
 
 .cta p {
-  color: rgba(8, 8, 7, 0.65);
+  color: rgba(252, 252, 251, 0.72);
   margin-bottom: 26px;
 }
 
