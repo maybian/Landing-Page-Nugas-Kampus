@@ -635,45 +635,40 @@ section { position: relative; padding: 70px 0; }
 /* ============ DIDUKUNG TOOLS ============ */
 .tools { background: var(--cream); }
 
+/* Satu strip abu-abu panjang sebagai highlight, tanpa kotak putih per logo */
+.tools-strip {
+  background: #ECEAE6;
+  border-radius: var(--radius-lg);
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 40px 36px;
+}
+
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 16px;
-  max-width: 1000px;
-  margin: 0 auto;
+  gap: 34px 26px;
+  align-items: center;
+  justify-items: center;
 }
 
-.tool-tile {
-  height: 92px;
+.tools-grid li {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px 22px;
-  background: #fff;
-  border: 1px solid rgba(8, 8, 7, 0.06);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-soft);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.tool-tile img {
-  max-height: 40px;
+.tools-grid img {
+  max-height: 44px;
+  max-width: 100%;
   width: auto;
   object-fit: contain;
-  /* Abu-abu saat diam, berwarna penuh saat disorot: gaya strip "trusted by" */
-  filter: grayscale(1);
-  opacity: 0.66;
-  transition: filter 0.25s ease, opacity 0.25s ease;
+  /* Logo membesar halus saat disorot */
+  transition: transform 0.22s ease;
 }
 
-.tool-tile:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card);
-}
-
-.tool-tile:hover img {
-  filter: grayscale(0);
-  opacity: 1;
+.tools-grid img:hover {
+  transform: scale(1.18);
 }
 
 .tools-note {
@@ -684,12 +679,12 @@ section { position: relative; padding: 70px 0; }
 }
 
 @media (max-width: 860px) {
-  .tools-grid { grid-template-columns: repeat(4, 1fr); }
+  .tools-grid { grid-template-columns: repeat(4, 1fr); gap: 30px 22px; }
 }
 @media (max-width: 520px) {
-  .tools-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .tool-tile { height: 74px; padding: 12px 14px; }
-  .tool-tile img { max-height: 30px; }
+  .tools-strip { padding: 28px 18px; }
+  .tools-grid { grid-template-columns: repeat(3, 1fr); gap: 24px 16px; }
+  .tools-grid img { max-height: 34px; }
 }
 
 .cta {
