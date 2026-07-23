@@ -330,8 +330,8 @@ section { position: relative; padding: 70px 0; }
 /* Side-by-side pills get cramped below ~480px; stack them full width
    so each one is an easy thumb target. */
 @media (max-width: 479px) {
-  .hero-cta, .cta-buttons { width: 100%; }
-  .hero-cta .btn, .cta-buttons .btn { width: 100%; }
+  .hero-cta { width: 100%; }
+  .hero-cta .btn { width: 100%; }
 }
 
 .hero-visual {
@@ -710,13 +710,14 @@ section { position: relative; padding: 70px 0; }
 .cta {
   margin: 30px 20px;
   border-radius: var(--radius-lg);
-  background: #fff;
+  /* Krem hangat lembut dengan bingkai emas biar tegas tapi tidak kontras keras */
+  background: linear-gradient(135deg, #FFFDFA 0%, #FFF4E2 100%);
   color: var(--black);
-  border: 1.5px solid rgba(8, 8, 7, 0.1);
+  border: 2px solid var(--gold);
   overflow: hidden;
   /* Keeps the decorative balls (z-index 0) from bleeding over the card. */
   z-index: 1;
-  box-shadow: var(--shadow-soft);
+  box-shadow: var(--shadow-card);
 }
 
 .cta-inner {
