@@ -1350,3 +1350,105 @@ section { position: relative; padding: 70px 0; }
   border-color: var(--gold);
   color: #fff;
 }
+
+/* ============ HALAMAN TENTANG ============ */
+/* Dipakai hanya di tentang.html: kartu dua orang di tim dan linimasa
+   perjalanan. Keduanya diletakkan di dalam .article-body. */
+
+.tim-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin: 26px 0 34px;
+}
+
+@media (min-width: 700px) {
+  .tim-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.tim-card {
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 26px 24px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(8,8,7,0.05);
+}
+
+.tim-nama {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--black);
+}
+
+.tim-peran {
+  display: block;
+  margin: 4px 0 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.tim-card p {
+  font-size: 0.92rem;
+  color: rgba(8,8,7,0.68);
+  margin: 0;
+}
+
+/* Linimasa: garis vertikal dengan titik di tiap tahap. Nomor urut bawaan
+   <ol> disembunyikan, penandanya diganti titik bulat lewat ::before. */
+.linimasa {
+  list-style: none;
+  padding: 0;
+  margin: 26px 0 34px;
+  position: relative;
+}
+
+.linimasa::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: rgba(253, 133, 0, 0.22);
+}
+
+.linimasa li {
+  position: relative;
+  padding: 0 0 22px 30px;
+}
+
+.linimasa li:last-child { padding-bottom: 0; }
+
+.linimasa li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--cream);
+}
+
+.linimasa-waktu {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.linimasa-isi {
+  display: block;
+  font-size: 0.95rem;
+  color: rgba(8,8,7,0.72);
+  line-height: 1.6;
+}
