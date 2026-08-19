@@ -381,8 +381,10 @@ section { position: relative; padding: 70px 0; }
   .hero-text    { grid-area: text; align-self: end; max-width: none; }
   .hero-actions { grid-area: actions; align-self: start; align-items: flex-start; }
   .hero-visual  { grid-area: visual; justify-self: end; max-width: 420px; }
-  .hero-cta     { justify-content: flex-start; }
-  .hero-note    { text-align: left; }
+  /* Dibatasi ke hero beranda saja. Tanpa pembatas .hero-inner, dua aturan
+     ini ikut menendang tombol admin di halaman layanan ke kiri. */
+  .hero-inner .hero-cta  { justify-content: flex-start; }
+  .hero-inner .hero-note { text-align: left; }
 }
 
 /* ============ WHY ============ */
