@@ -284,7 +284,7 @@ section { position: relative; padding: 70px 0; }
 .hero { padding-top: 50px; padding-bottom: 40px; }
 
 /* Mobile: a single centred stack. The DOM order is text -> photo -> actions,
-   so headline, then the illustration, then the CTA buttons — no order hacks
+   so headline, then the illustration, then the CTA buttons, no order hacks
    needed. Desktop swaps to a two-column grid further down. */
 .hero-inner {
   display: flex;
@@ -554,7 +554,7 @@ section { position: relative; padding: 70px 0; }
 .testi-track {
   display: flex;
   /* Screenshots vary in height, so pin cards to the top and let each one be
-     as tall as its own image — a natural "testimonial wall" look. */
+     as tall as its own image, a natural "testimonial wall" look. */
   align-items: flex-start;
   gap: 18px;
   overflow-x: auto;
@@ -1236,3 +1236,115 @@ section { position: relative; padding: 70px 0; }
 .related-card h3 { font-size: 1.05rem; }
 .related-card h3 a { color: var(--black); }
 .related-card h3 a:hover { color: var(--gold); }
+
+/* ============ HALAMAN LAYANAN ============ */
+
+/* Hero halaman layanan memakai kerangka .article-hero, hanya perlu jarak
+   ekstra sebelum tombol WA-nya. */
+.layanan-cta { margin-top: 26px; }
+
+.article-hero .hero-desc {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Daftar "apa yang kamu terima". Centang dibuat lewat pseudo-element supaya
+   teks tetap bisa dipilih dan dibaca screen reader tanpa gangguan.
+   Selektornya sengaja ikut menyebut .article-body ul, karena kalau tidak,
+   aturan titik bulat bawaan .article-body ul li::before yang menang. */
+.article-body ul.checklist {
+  margin: 20px 0 24px;
+  gap: 14px;
+}
+
+.article-body ul.checklist li {
+  padding-left: 40px;
+  line-height: 1.65;
+}
+
+.article-body ul.checklist li::before {
+  top: 2px;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  box-shadow: 0 4px 12px rgba(253, 133, 0, 0.28);
+}
+
+/* Batang centangnya: dua sisi border yang diputar 45 derajat. */
+.article-body ul.checklist li::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  width: 9px;
+  height: 5px;
+  border-left: 2.5px solid #fff;
+  border-bottom: 2.5px solid #fff;
+  transform: rotate(-45deg);
+}
+
+/* Tautan dari kartu layanan di beranda menuju halaman layanan lengkapnya.
+   Dibuat flex + margin-top auto biar posisinya rata di dasar tiap kartu
+   walaupun jumlah poin di atasnya berbeda-beda. */
+.service-card { display: flex; flex-direction: column; }
+.service-card ul { flex: 1; }
+
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(253, 133, 0, 0.15);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--gold);
+  transition: gap 0.2s ease;
+}
+
+.service-link:hover { gap: 14px; }
+
+/* Strip tautan ke semua halaman layanan, ditaruh di bawah grid kartu.
+   Fungsinya dua: jalan pintas buat pengunjung, dan memastikan tiap halaman
+   layanan punya tautan langsung dari beranda supaya gampang dirayapi. */
+.layanan-index {
+  margin-top: 44px;
+  text-align: center;
+}
+
+.layanan-index-label {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(8, 8, 7, 0.45);
+}
+
+.layanan-index ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.layanan-index a {
+  display: inline-block;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(253, 133, 0, 0.22);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(8, 8, 7, 0.75);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.layanan-index a:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
