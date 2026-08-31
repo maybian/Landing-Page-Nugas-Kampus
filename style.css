@@ -1452,3 +1452,201 @@ section { position: relative; padding: 70px 0; }
   color: rgba(8,8,7,0.72);
   line-height: 1.6;
 }
+
+/* ============ LAYANAN: CEK FORMAT SKRIPSI ============ */
+.cf-showcase { background: linear-gradient(180deg, #FFF6E8 0%, var(--cream) 100%); }
+
+.cf-report-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 340px;
+  margin: 0 auto;
+}
+@media (min-width: 720px) {
+  .cf-report-grid { grid-template-columns: repeat(3, 1fr); max-width: 1000px; align-items: start; }
+}
+
+.cf-report-frame {
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(8,8,7,0.08);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.cf-report-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid rgba(8,8,7,0.08);
+}
+
+.cf-report-cap {
+  display: block;
+  padding: 11px 16px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: #fff;
+}
+.cf-report-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(8,8,7,0.55);
+  margin-top: 22px;
+}
+
+.cf-checks {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) { .cf-checks { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .cf-checks { grid-template-columns: repeat(3, 1fr); } }
+
+.cf-check-group {
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 22px 22px 20px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(8,8,7,0.05);
+}
+.cf-check-group h3 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(8,8,7,0.08);
+}
+.cf-check-group ul { display: flex; flex-direction: column; gap: 7px; }
+.cf-check-group li {
+  font-size: 0.86rem;
+  color: rgba(8,8,7,0.72);
+  padding-left: 26px;
+  position: relative;
+}
+.cf-check-group li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--wa-green);
+}
+/* Batang centang: dua sisi border diputar 45 derajat, sama seperti ul.checklist. */
+.cf-check-group li::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 7px;
+  width: 7px;
+  height: 4px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+}
+
+.cf-annote {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.cf-annote-shot {
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(8,8,7,0.1);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.cf-annote-shot img { width: 100%; height: auto; display: block; }
+.cf-annote-shot figcaption {
+  padding: 11px 16px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-top: 1px solid rgba(8,8,7,0.08);
+}
+
+.cf-annote-notes { display: flex; flex-direction: column; gap: 14px; }
+.cf-annote-lead {
+  font-size: 0.9rem;
+  color: rgba(8,8,7,0.65);
+  margin-bottom: 2px;
+}
+.cf-annote-note {
+  background: #fff;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(8,8,7,0.08);
+  border-left: 4px solid #C7344B;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+}
+.cf-annote-note .cf-tag {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.72rem;
+  color: #C7344B;
+  letter-spacing: 0.04em;
+}
+.cf-annote-note p { font-size: 0.88rem; color: rgba(8,8,7,0.72); margin-top: 4px; }
+.cf-annote-note strong { color: var(--black); }
+
+.cf-limit {
+  max-width: 760px;
+  margin: 0 auto;
+  background: linear-gradient(160deg, #FFF6E8, var(--cream));
+  border: 1px solid rgba(253,133,0,0.15);
+  border-radius: var(--radius-md);
+  padding: 26px 28px;
+}
+.cf-limit h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.cf-limit p { font-size: 0.92rem; color: rgba(8,8,7,0.7); }
+
+/* ============ BERANDA: SOROTAN ALAT CEK FORMAT ============ */
+.cf-home { background: linear-gradient(180deg, #FFF6E8 0%, var(--cream) 100%); }
+.cf-home-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .cf-home-inner { grid-template-columns: 1.05fr 0.95fr; gap: 46px; }
+}
+.cf-home-text .eyebrow { margin-bottom: 14px; }
+.cf-home-text h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 14px; }
+.cf-home-text p { color: rgba(8,8,7,0.7); font-size: 1rem; margin-bottom: 22px; }
+.cf-home-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+}
+.cf-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold);
+  transition: gap 0.2s ease;
+}
+.cf-home-link:hover { gap: 13px; }
+
+.cf-home-visual {
+  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(8,8,7,0.08);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.cf-home-visual img { width: 100%; height: auto; display: block; }
