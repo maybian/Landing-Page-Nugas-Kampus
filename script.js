@@ -100,7 +100,12 @@ function setupTestimonials() {
     { img: 'assets/testi-8.jpg', cap: 'Hasil Sesuai Request · Format Rapi' },
     { img: 'assets/testi-9.jpg', cap: 'Chat Senin, Selasa Kelar' },
     { img: 'assets/testi-10.jpg', cap: 'Skripsi ACC · Lolos Sidang' },
-    { img: 'assets/testi-11.jpg', cap: 'Admin Fast Respon · Harga Terjangkau' }
+    { img: 'assets/testi-11.jpg', cap: 'Admin Fast Respon · Harga Terjangkau' },
+    { img: 'assets/testi-12.jpg', cap: 'Olah Data SPSS · Sabar Menjelaskan' },
+    { img: 'assets/testi-13.jpg', cap: 'Tugas Kelar · Panik Deadline Teratasi' },
+    { img: 'assets/testi-14.jpg', cap: 'Pelayanan Cepat · Detail dan Teliti' },
+    { img: 'assets/testi-15.jpg', cap: 'Artikel Publikasi · Pengerjaan Cepat' },
+    { img: 'assets/testi-16.jpg', cap: 'Semua ACC · Direkomendasikan ke Teman' }
   ];
   // ==========================
 

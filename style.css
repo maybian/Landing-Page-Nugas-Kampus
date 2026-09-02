@@ -395,6 +395,7 @@ section { position: relative; padding: 70px 0; }
 }
 .section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
 .section-desc { margin-top: 12px; color: rgba(8,8,7,0.65); }
+.section-desc strong { color: var(--black); font-weight: 700; }
 
 .why-grid {
   display: grid;
