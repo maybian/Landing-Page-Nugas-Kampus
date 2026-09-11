@@ -72,6 +72,30 @@ var CLARITY_ID = '';
   }, true);
 
   /* ------------------------------------------------------------------------
+     Pelacakan klik ke Alat Cek Format (cek.nugaskampus.com).
+
+     Sama seperti klik_wa, tapi buat tombol yang langsung ke tool self-service,
+     bukan ke WhatsApp. Tanpa ini kita buta soal berapa yang benar-benar coba
+     alatnya dari landing page.
+     ------------------------------------------------------------------------ */
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest ? e.target.closest('a[href*="cek.nugaskampus.com"]') : null;
+    if (!link) return;
+
+    var src = link.getAttribute('data-cf-src') || 'tanpa-label';
+
+    if (GA4_ID) {
+      gtag('event', 'klik_cek_format', {
+        cf_src: src,
+        halaman: window.location.pathname
+      });
+    }
+    if (CLARITY_ID && window.clarity) {
+      window.clarity('event', 'klik_cek_format_' + src);
+    }
+  }, true);
+
+  /* ------------------------------------------------------------------------
      Penanda sumber kunjungan.
 
      Kalau pengunjung datang dari link berparameter (?utm_source=instagram,

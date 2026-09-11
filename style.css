@@ -168,6 +168,13 @@ section { position: relative; padding: 70px 0; }
 }
 .btn-wa-outline:hover { background: rgba(27, 193, 64, 0.08); }
 
+.btn-gold {
+  background: var(--gold);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(253, 133, 0, 0.35);
+}
+.btn-gold:hover { background: #E67800; }
+
 .btn-large { padding: 16px 32px; font-size: 1rem; }
 .btn-small { padding: 9px 18px; font-size: 0.85rem; }
 
