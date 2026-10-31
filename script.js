@@ -228,6 +228,25 @@ function setupTestimonials() {
   buildDots();
 }
 
+/* Geser mulus dengan easing (dipakai slider Karya). Snap dimatikan selama animasi. */
+function animateScroll(el, to, dur) {
+  if (el._anim) cancelAnimationFrame(el._anim);
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !dur) { el.scrollLeft = to; return; }
+  var from = el.scrollLeft, delta = to - from, t0 = null;
+  if (Math.abs(delta) < 1) return;
+  el.classList.add('is-anim');
+  function ease(t) { return 1 - Math.pow(1 - t, 4); }
+  function frame(ts) {
+    if (t0 === null) t0 = ts;
+    var k = Math.min((ts - t0) / dur, 1);
+    el.scrollLeft = from + delta * ease(k);
+    if (k < 1) { el._anim = requestAnimationFrame(frame); }
+    else { el._anim = null; el.classList.remove('is-anim'); }
+  }
+  el._anim = requestAnimationFrame(frame);
+}
+
 function setupKarya() {
   var track = document.getElementById('karyaTrack');
   if (!track) return;
@@ -252,21 +271,42 @@ function setupKarya() {
       screens: [
         { img: 'assets/karya/presensi-1.webp', label: 'Beranda guru' },
         { img: 'assets/karya/presensi-2.webp', label: 'Riwayat' },
-        { img: 'assets/karya/presensi-3.webp', label: 'Admin: hari ini' },
-        { img: 'assets/karya/presensi-4.webp', label: 'Admin: rekap' }
+        { img: 'assets/karya/presensi-3.webp', label: 'Ajukan izin' },
+        { img: 'assets/karya/presensi-4.webp', label: 'Profil' },
+        { img: 'assets/karya/presensi-5.webp', label: 'Admin: hari ini' },
+        { img: 'assets/karya/presensi-6.webp', label: 'Admin: izin' },
+        { img: 'assets/karya/presensi-7.webp', label: 'Admin: guru' },
+        { img: 'assets/karya/presensi-8.webp', label: 'Admin: rekap' }
       ],
       feats: ['Foto kamera langsung, tanpa unggah galeri', 'Jam dan jarak ke sekolah dicek di server', 'Izin dan sakit dengan bukti, disetujui admin', 'Rekap bulanan bisa diunduh sebagai Excel']
     },
     {
       device: 'phone', tag: 'Proyek sukarela', title: 'Kas Masjid Kampus',
-      desc: 'Pembukuan kas masjid kampus yang transparan. Takmir mencatat pemasukan dan pengeluaran, pengawas cukup melihat laporannya.',
+      desc: 'Pembukuan kas masjid kampus yang transparan. Takmir mencatat pemasukan dan pengeluaran, pengawas cukup melihat laporannya, dan jamaah bisa memindai QR untuk membuka laporan.',
       screens: [
         { img: 'assets/karya/masjid-1.webp', label: 'Beranda' },
-        { img: 'assets/karya/masjid-2.webp', label: 'Riwayat' },
-        { img: 'assets/karya/masjid-3.webp', label: 'Kegiatan' },
-        { img: 'assets/karya/masjid-4.webp', label: 'Laporan' }
+        { img: 'assets/karya/masjid-2.webp', label: 'Catat' },
+        { img: 'assets/karya/masjid-3.webp', label: 'Riwayat' },
+        { img: 'assets/karya/masjid-4.webp', label: 'Kegiatan' },
+        { img: 'assets/karya/masjid-5.webp', label: 'Laporan' },
+        { img: 'assets/karya/masjid-6.webp', label: 'Papan publik' },
+        { img: 'assets/karya/masjid-7.webp', label: 'Poster QR' },
+        { img: 'assets/karya/masjid-8.webp', label: 'Pengaturan' }
       ],
-      feats: ['Dua peran akses: takmir dan pengawas', 'Foto struk tersimpan bersama transaksi', 'Rekap per kegiatan dan grafik enam bulan', 'Laporan siap cetak PDF dan Excel']
+      feats: ['Dua peran akses: takmir dan pengawas', 'Poster QR siap unduh dan cetak untuk papan transparansi', 'Foto struk tersimpan bersama transaksi', 'Laporan siap cetak PDF dan Excel']
+    },
+    {
+      device: 'phone', tag: 'Alat internal', title: 'Pembukuan Nugas Kampus',
+      desc: 'Aplikasi pembukuan yang kami pakai sendiri. Tiap order dicatat, pembagian kas dan gaji dihitung otomatis, dan tiap awal bulan muncul rekap bulan sebelumnya.',
+      screens: [
+        { img: 'assets/karya/nk-1.webp', label: 'Beranda' },
+        { img: 'assets/karya/nk-2.webp', label: 'Rekap bulanan' },
+        { img: 'assets/karya/nk-3.webp', label: 'Catat order' },
+        { img: 'assets/karya/nk-4.webp', label: 'Riwayat' },
+        { img: 'assets/karya/nk-5.webp', label: 'Pengaturan' },
+        { img: 'assets/karya/nk-6.webp', label: 'Saldo uang usaha' }
+      ],
+      feats: ['Bagi hasil otomatis dengan persentase yang bisa diatur', 'Rekap bulan sebelumnya muncul tiap awal bulan', 'Riwayat bisa dicari, difilter, dan diekspor ke Excel', 'Dikunci PIN, dipakai dari ponsel seperti aplikasi']
     },
     {
       device: 'phone', tag: 'Aplikasi sendiri', title: 'Wallet, Keuangan Pribadi',
@@ -275,9 +315,10 @@ function setupKarya() {
         { img: 'assets/karya/wallet-1.webp', label: 'Beranda' },
         { img: 'assets/karya/wallet-2.webp', label: 'Pemasukan' },
         { img: 'assets/karya/wallet-3.webp', label: 'Pengeluaran' },
-        { img: 'assets/karya/wallet-4.webp', label: 'Dana darurat' }
+        { img: 'assets/karya/wallet-4.webp', label: 'Dana darurat' },
+        { img: 'assets/karya/wallet-5.webp', label: 'Pengaturan' }
       ],
-      feats: ['Dipasang di layar utama ponsel seperti aplikasi biasa', 'Dana darurat disisihkan otomatis sesuai persen yang kamu atur', 'Tampilan kaca dengan lima wallpaper', 'Data tersimpan aman per pengguna']
+      feats: ['Dipasang di layar utama ponsel seperti aplikasi biasa', 'Dana darurat disisihkan otomatis sesuai persen yang kamu atur', 'Pilihan wallpaper dan animasi di Pengaturan', 'Data tersimpan aman per pengguna']
     }
   ];
   // ==========================
@@ -325,7 +366,7 @@ function setupKarya() {
         var b = el('button', 'karya-tab' + (i === 0 ? ' is-on' : ''), s.label);
         b.type = 'button';
         b.addEventListener('click', function () {
-          strip.scrollTo({ left: i * strip.clientWidth, behavior: 'smooth' });
+          animateScroll(strip, i * strip.clientWidth, 560);
         });
         tabs.appendChild(b);
       });
@@ -335,12 +376,27 @@ function setupKarya() {
 
     // sinkron tab dengan posisi geser
     var sraf;
+    var lastIdx = -1;
     strip.addEventListener('scroll', function () {
-      if (!tabs) return;
       if (sraf) cancelAnimationFrame(sraf);
       sraf = requestAnimationFrame(function () {
-        var idx = Math.round(strip.scrollLeft / Math.max(strip.clientWidth, 1));
-        tabs.querySelectorAll('.karya-tab').forEach(function (t, i) { t.classList.toggle('is-on', i === idx); });
+        var w = Math.max(strip.clientWidth, 1);
+        // efek: layar yang menjauh mengecil, memudar, dan bergeser sedikit
+        var slides = strip.children;
+        for (var s = 0; s < slides.length; s++) {
+          var p = (s * w - strip.scrollLeft) / w;
+          var ap = Math.min(Math.abs(p), 1);
+          var im = slides[s].firstChild;
+          im.style.transform = 'translateX(' + (p * -14).toFixed(2) + '%) scale(' + (1 - 0.1 * ap).toFixed(3) + ')';
+          im.style.opacity = (1 - 0.6 * ap).toFixed(3);
+        }
+        if (!tabs) return;
+        var idx = Math.round(strip.scrollLeft / w);
+        if (idx === lastIdx) return;
+        lastIdx = idx;
+        var on = null;
+        tabs.querySelectorAll('.karya-tab').forEach(function (t, i) { t.classList.toggle('is-on', i === idx); if (i === idx) on = t; });
+        if (on) animateScroll(tabs, on.offsetLeft - (tabs.clientWidth - on.offsetWidth) / 2, 360);
       });
     });
 
@@ -369,7 +425,7 @@ function setupKarya() {
       idx = Math.max(0, Math.min(strip.children.length - 1, idx));
       strip.classList.remove('is-dragging');
       strip.scrollLeft = now;
-      strip.scrollTo({ left: idx * w, behavior: 'smooth' });
+      animateScroll(strip, idx * w, 520);
     }
     strip.addEventListener('pointerup', sEnd);
     strip.addEventListener('pointerleave', sEnd);
@@ -416,15 +472,15 @@ function setupKarya() {
       d.className = 'testi-dot';
       d.setAttribute('aria-label', 'Ke aplikasi ' + (i + 1));
       d.addEventListener('click', function () {
-        track.scrollTo({ left: i * step(), behavior: 'smooth' });
+        animateScroll(track, i * step(), 640);
       });
       dotsWrap.appendChild(d);
     });
     updateActive();
   }
 
-  prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
-  next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+  prev.addEventListener('click', function () { animateScroll(track, track.scrollLeft - step(), 640); });
+  next.addEventListener('click', function () { animateScroll(track, track.scrollLeft + step(), 640); });
 
   var raf;
   track.addEventListener('scroll', function () {
