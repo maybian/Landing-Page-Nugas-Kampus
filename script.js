@@ -234,7 +234,7 @@ function setupKarya() {
 
   // ====== EDIT DI SINI ======
   // device: 'web' = bingkai browser landscape, 'phone' = bingkai ponsel portrait.
-  // screens = daftar tampilan (gambar di assets/karya/), ditampilkan sebagai tab.
+  // screens = tampilan aplikasi (gambar di assets/karya/). Digeser di dalam bingkai.
   var KARYA = [
     {
       device: 'web', tag: 'Pesanan klien', title: 'SIMEP, Monitoring PKL SMK',
@@ -250,34 +250,34 @@ function setupKarya() {
       device: 'phone', tag: 'Pesanan klien', title: 'Presensi Guru Digital',
       desc: 'Presensi guru KB dan TK lewat ponsel. Foto langsung dari kamera dan lokasi dicek di server, jadi kehadiran sulit dipalsukan dan admin tidak perlu menghitung manual.',
       screens: [
-        { img: 'assets/karya/presensi.webp', label: 'Masuk' }
+        { img: 'assets/karya/presensi-1.webp', label: 'Beranda guru' },
+        { img: 'assets/karya/presensi-2.webp', label: 'Riwayat' },
+        { img: 'assets/karya/presensi-3.webp', label: 'Admin: hari ini' },
+        { img: 'assets/karya/presensi-4.webp', label: 'Admin: rekap' }
       ],
-      feats: ['Foto kamera langsung, tanpa unggah galeri', 'Jam dan jarak ke sekolah dicek di server', 'Izin dan sakit dengan bukti, disetujui admin', 'Rekap bulanan bisa diunduh sebagai CSV']
+      feats: ['Foto kamera langsung, tanpa unggah galeri', 'Jam dan jarak ke sekolah dicek di server', 'Izin dan sakit dengan bukti, disetujui admin', 'Rekap bulanan bisa diunduh sebagai Excel']
     },
     {
       device: 'phone', tag: 'Proyek sukarela', title: 'Kas Masjid Kampus',
       desc: 'Pembukuan kas masjid kampus yang transparan. Takmir mencatat pemasukan dan pengeluaran, pengawas cukup melihat laporannya.',
       screens: [
-        { img: 'assets/karya/kas-masjid.webp', label: 'Masuk' }
+        { img: 'assets/karya/masjid-1.webp', label: 'Beranda' },
+        { img: 'assets/karya/masjid-2.webp', label: 'Riwayat' },
+        { img: 'assets/karya/masjid-3.webp', label: 'Kegiatan' },
+        { img: 'assets/karya/masjid-4.webp', label: 'Laporan' }
       ],
-      feats: ['Dua peran akses: takmir dan pengawas', 'Foto struk tersimpan bersama transaksi', 'Rekap per kegiatan dan grafik bulanan', 'Laporan siap cetak PDF dan Excel']
+      feats: ['Dua peran akses: takmir dan pengawas', 'Foto struk tersimpan bersama transaksi', 'Rekap per kegiatan dan grafik enam bulan', 'Laporan siap cetak PDF dan Excel']
     },
     {
       device: 'phone', tag: 'Aplikasi sendiri', title: 'Wallet, Keuangan Pribadi',
       desc: 'Aplikasi keuangan pribadi bergaya iOS yang dipasang di layar utama ponsel. Mencatat pemasukan, pengeluaran, dan dana darurat dengan cepat.',
       screens: [
-        { img: 'assets/karya/wallet.webp', label: 'Sambutan' }
+        { img: 'assets/karya/wallet-1.webp', label: 'Beranda' },
+        { img: 'assets/karya/wallet-2.webp', label: 'Pemasukan' },
+        { img: 'assets/karya/wallet-3.webp', label: 'Pengeluaran' },
+        { img: 'assets/karya/wallet-4.webp', label: 'Dana darurat' }
       ],
       feats: ['Dipasang di layar utama ponsel seperti aplikasi biasa', 'Dana darurat disisihkan otomatis sesuai persen yang kamu atur', 'Tampilan kaca dengan lima wallpaper', 'Data tersimpan aman per pengguna']
-    },
-    {
-      device: 'web', tag: 'Alat gratis', title: 'Alat Nomor Halaman Skripsi',
-      desc: 'Merapikan penomoran halaman skripsi sesuai pedoman kampus. Seluruh proses jalan di browser, jadi dokumenmu tidak pernah keluar dari komputer sendiri.',
-      screens: [
-        { img: 'assets/karya/nomor-1.webp', label: 'Unggah' },
-        { img: 'assets/karya/nomor-2.webp', label: 'Hasil' }
-      ],
-      feats: ['Romawi untuk halaman awal, angka arab mulai BAB I', 'Halaman judul bab diberi nomor di tengah bawah', 'Berkas asli tidak diubah', 'Gratis dan tanpa daftar']
     }
   ];
   // ==========================
@@ -294,7 +294,7 @@ function setupKarya() {
     var card = el('article', 'testi-card karya-card');
     card.setAttribute('role', 'listitem');
 
-    // --- sisi kiri: bingkai perangkat + tab layar
+    // --- sisi kiri: bingkai perangkat, layar bisa digeser
     var show = el('div', 'karya-show karya-show-' + k.device);
     var frame = el('div', 'karya-frame karya-frame-' + k.device);
     if (k.device === 'web') {
@@ -303,30 +303,76 @@ function setupKarya() {
       frame.appendChild(bar);
     }
     var screen = el('div', 'karya-screen');
-    var shot = el('img');
-    shot.alt = 'Tampilan aplikasi ' + k.title;
-    shot.loading = 'lazy';
-    shot.src = k.screens[0].img;
-    shot.addEventListener('error', function () { card.remove(); buildDots(); });
-    screen.appendChild(shot);
+    var strip = el('div', 'karya-strip');
+    k.screens.forEach(function (s) {
+      var slide = el('div', 'karya-slide');
+      var shot = el('img');
+      shot.alt = k.title + ': ' + s.label;
+      shot.loading = 'lazy';
+      shot.draggable = false;
+      shot.src = s.img;
+      slide.appendChild(shot);
+      strip.appendChild(slide);
+    });
+    screen.appendChild(strip);
     frame.appendChild(screen);
     show.appendChild(frame);
 
+    var tabs = null;
     if (k.screens.length > 1) {
-      var tabs = el('div', 'karya-tabs');
+      tabs = el('div', 'karya-tabs');
       k.screens.forEach(function (s, i) {
         var b = el('button', 'karya-tab' + (i === 0 ? ' is-on' : ''), s.label);
         b.type = 'button';
-        b.addEventListener('click', function (e) {
-          e.stopPropagation();
-          shot.src = s.img;
-          tabs.querySelectorAll('.karya-tab').forEach(function (t) { t.classList.remove('is-on'); });
-          b.classList.add('is-on');
+        b.addEventListener('click', function () {
+          strip.scrollTo({ left: i * strip.clientWidth, behavior: 'smooth' });
         });
         tabs.appendChild(b);
       });
       show.appendChild(tabs);
+      show.appendChild(el('p', 'karya-hint', 'Geser layar untuk melihat tampilan lainnya'));
     }
+
+    // sinkron tab dengan posisi geser
+    var sraf;
+    strip.addEventListener('scroll', function () {
+      if (!tabs) return;
+      if (sraf) cancelAnimationFrame(sraf);
+      sraf = requestAnimationFrame(function () {
+        var idx = Math.round(strip.scrollLeft / Math.max(strip.clientWidth, 1));
+        tabs.querySelectorAll('.karya-tab').forEach(function (t, i) { t.classList.toggle('is-on', i === idx); });
+      });
+    });
+
+    // geser dengan mouse di dalam bingkai (sentuhan sudah native)
+    var sdown = false, sx = 0, ss = 0, smoved = false;
+    strip.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'touch') return;
+      sdown = true; smoved = false; sx = e.clientX; ss = strip.scrollLeft;
+      strip.classList.add('is-dragging');
+    });
+    strip.addEventListener('pointermove', function (e) {
+      if (!sdown) return;
+      var dx = e.clientX - sx;
+      if (Math.abs(dx) > 4) smoved = true;
+      strip.scrollLeft = ss - dx;
+    });
+    function sEnd() {
+      if (!sdown) return;
+      sdown = false;
+      // baca posisi SEBELUM snap dinyalakan lagi, kalau tidak langsung loncat balik
+      var w = strip.clientWidth || 1;
+      var now = strip.scrollLeft;
+      var base = Math.round(ss / w);
+      var d = now - ss;
+      var idx = Math.abs(d) > 40 ? base + (d > 0 ? 1 : -1) : Math.round(now / w);
+      idx = Math.max(0, Math.min(strip.children.length - 1, idx));
+      strip.classList.remove('is-dragging');
+      strip.scrollLeft = now;
+      strip.scrollTo({ left: idx * w, behavior: 'smooth' });
+    }
+    strip.addEventListener('pointerup', sEnd);
+    strip.addEventListener('pointerleave', sEnd);
 
     // --- sisi kanan: keterangan
     var info = el('div', 'karya-info');
@@ -386,10 +432,11 @@ function setupKarya() {
     raf = requestAnimationFrame(updateActive);
   });
 
+  // geser antar aplikasi dengan mouse: hanya dari luar bingkai layar
   var down = false, startX = 0, startScroll = 0, moved = false;
   track.addEventListener('pointerdown', function (e) {
     if (e.pointerType === 'touch') return;
-    if (e.target.closest && e.target.closest('.karya-tab')) return;
+    if (e.target.closest && (e.target.closest('.karya-screen') || e.target.closest('.karya-tab'))) return;
     down = true; moved = false;
     startX = e.clientX; startScroll = track.scrollLeft;
     track.classList.add('is-dragging');

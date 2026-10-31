@@ -1735,7 +1735,7 @@ section { position: relative; padding: 70px 0; }
 }
 .karya-bar i { width: 9px; height: 9px; border-radius: 50%; background: #c6c9d1; display: block; }
 .karya-frame-web .karya-screen { aspect-ratio: 16 / 10; background: #f5f6fa; }
-.karya-frame-web .karya-screen img { width: 100%; height: 100%; object-fit: contain; object-position: top; display: block; }
+.karya-frame-web .karya-slide img { width: 100%; height: 100%; aspect-ratio: 16 / 10; object-fit: contain; object-position: top; display: block; }
 
 .karya-frame-phone {
   width: min(230px, 62%);
@@ -1743,8 +1743,8 @@ section { position: relative; padding: 70px 0; }
   border: 9px solid #15151a;
   background: #15151a;
 }
-.karya-frame-phone .karya-screen { aspect-ratio: 1 / 2; border-radius: 25px; overflow: hidden; background: #000; }
-.karya-frame-phone .karya-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.karya-frame-phone .karya-screen { aspect-ratio: 390 / 844; border-radius: 25px; overflow: hidden; background: #000; }
+.karya-frame-phone .karya-slide img { width: 100%; height: 100%; aspect-ratio: 390 / 844; object-fit: cover; object-position: top; display: block; }
 
 .karya-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .karya-tab {
@@ -1754,6 +1754,23 @@ section { position: relative; padding: 70px 0; }
   transition: background .2s ease, color .2s ease;
 }
 .karya-tab.is-on { background: var(--black); color: #fff; border-color: var(--black); }
+
+/* layar yang bisa digeser di dalam bingkai */
+.karya-strip {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+  touch-action: pan-x pan-y;
+}
+.karya-strip::-webkit-scrollbar { display: none; }
+.karya-strip.is-dragging { scroll-snap-type: none; scroll-behavior: auto; cursor: grabbing; }
+.karya-slide { flex: 0 0 100%; scroll-snap-align: center; }
+.karya-slide img { -webkit-user-drag: none; user-select: none; }
+.karya-hint { font-size: 0.74rem; color: rgba(8,8,7,0.55); text-align: center; }
 
 /* sisi kanan: keterangan */
 .karya-info { padding: 26px 26px 28px; text-align: left; display: flex; flex-direction: column; justify-content: center; }
