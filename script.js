@@ -233,44 +233,112 @@ function setupKarya() {
   if (!track) return;
 
   // ====== EDIT DI SINI ======
-  // Tiap aplikasi = satu objek. Gambar ditaruh di assets/karya/.
+  // device: 'web' = bingkai browser landscape, 'phone' = bingkai ponsel portrait.
+  // screens = daftar tampilan (gambar di assets/karya/), ditampilkan sebagai tab.
   var KARYA = [
-    { img: 'assets/karya/simep.webp', tag: 'Pesanan klien', title: 'SIMEP, Monitoring PKL SMK', desc: 'Sistem web pemantau praktik kerja lapangan siswa SMK di Surakarta: data siswa, tempat PKL, jurnal, dan penilaian.' },
-    { img: 'assets/karya/presensi.webp', tag: 'Pesanan klien', title: 'Presensi Guru Digital', desc: 'Guru KB dan TK absen dari ponsel, admin sekolah langsung melihat rekap kehadiran.' },
-    { img: 'assets/karya/kas-masjid.webp', tag: 'Proyek sukarela', title: 'Kas Masjid Kampus', desc: 'Pembukuan kas masjid kampus dengan dua peran akses: takmir mencatat, pengawas hanya melihat.' },
-    { img: 'assets/karya/wallet.webp', tag: 'Aplikasi sendiri', title: 'Wallet, Keuangan Pribadi', desc: 'Aplikasi keuangan bergaya iOS yang bisa dipasang di layar utama ponsel.' },
-    { img: 'assets/karya/nomor-halaman.webp', tag: 'Alat gratis', title: 'Alat Nomor Halaman Skripsi', desc: 'Merapikan penomoran halaman sesuai pedoman kampus, jalan di peramban tanpa mengunggah dokumen.' }
+    {
+      device: 'web', tag: 'Pesanan klien', title: 'SIMEP, Monitoring PKL SMK',
+      desc: 'Sistem web untuk memantau praktik kerja lapangan siswa SMK di Surakarta. Guru pembimbing, siswa, dan admin sekolah bekerja di satu tempat, tanpa rekap manual.',
+      screens: [
+        { img: 'assets/karya/simep-1.webp', label: 'Beranda guru' },
+        { img: 'assets/karya/simep-2.webp', label: 'Evaluasi siswa' },
+        { img: 'assets/karya/simep-3.webp', label: 'Rekap nilai' }
+      ],
+      feats: ['Laporan harian wajib foto kamera dan lokasi GPS', 'Nilai teknis, sikap, dan laporan dihitung otomatis', 'Status kelulusan mengikuti syarat kehadiran', 'Panel admin untuk siswa, guru, dan tempat PKL']
+    },
+    {
+      device: 'phone', tag: 'Pesanan klien', title: 'Presensi Guru Digital',
+      desc: 'Presensi guru KB dan TK lewat ponsel. Foto langsung dari kamera dan lokasi dicek di server, jadi kehadiran sulit dipalsukan dan admin tidak perlu menghitung manual.',
+      screens: [
+        { img: 'assets/karya/presensi.webp', label: 'Masuk' }
+      ],
+      feats: ['Foto kamera langsung, tanpa unggah galeri', 'Jam dan jarak ke sekolah dicek di server', 'Izin dan sakit dengan bukti, disetujui admin', 'Rekap bulanan bisa diunduh sebagai CSV']
+    },
+    {
+      device: 'phone', tag: 'Proyek sukarela', title: 'Kas Masjid Kampus',
+      desc: 'Pembukuan kas masjid kampus yang transparan. Takmir mencatat pemasukan dan pengeluaran, pengawas cukup melihat laporannya.',
+      screens: [
+        { img: 'assets/karya/kas-masjid.webp', label: 'Masuk' }
+      ],
+      feats: ['Dua peran akses: takmir dan pengawas', 'Foto struk tersimpan bersama transaksi', 'Rekap per kegiatan dan grafik bulanan', 'Laporan siap cetak PDF dan Excel']
+    },
+    {
+      device: 'phone', tag: 'Aplikasi sendiri', title: 'Wallet, Keuangan Pribadi',
+      desc: 'Aplikasi keuangan pribadi bergaya iOS yang dipasang di layar utama ponsel. Mencatat pemasukan, pengeluaran, dan dana darurat dengan cepat.',
+      screens: [
+        { img: 'assets/karya/wallet.webp', label: 'Sambutan' }
+      ],
+      feats: ['Dipasang di layar utama ponsel seperti aplikasi biasa', 'Dana darurat disisihkan otomatis sesuai persen yang kamu atur', 'Tampilan kaca dengan lima wallpaper', 'Data tersimpan aman per pengguna']
+    },
+    {
+      device: 'web', tag: 'Alat gratis', title: 'Alat Nomor Halaman Skripsi',
+      desc: 'Merapikan penomoran halaman skripsi sesuai pedoman kampus. Seluruh proses jalan di browser, jadi dokumenmu tidak pernah keluar dari komputer sendiri.',
+      screens: [
+        { img: 'assets/karya/nomor-1.webp', label: 'Unggah' },
+        { img: 'assets/karya/nomor-2.webp', label: 'Hasil' }
+      ],
+      feats: ['Romawi untuk halaman awal, angka arab mulai BAB I', 'Halaman judul bab diberi nomor di tengah bawah', 'Berkas asli tidak diubah', 'Gratis dan tanpa daftar']
+    }
   ];
   // ==========================
 
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
+  }
+
   var frag = document.createDocumentFragment();
   KARYA.forEach(function (k) {
-    var card = document.createElement('article');
-    card.className = 'testi-card karya-card';
+    var card = el('article', 'testi-card karya-card');
     card.setAttribute('role', 'listitem');
 
-    var shot = document.createElement('div');
-    shot.className = 'testi-shot';
-    var img = document.createElement('img');
-    img.src = k.img;
-    img.loading = 'lazy';
-    img.alt = 'Tampilan aplikasi ' + k.title;
-    img.addEventListener('error', function () { card.remove(); buildDots(); });
-    shot.appendChild(img);
+    // --- sisi kiri: bingkai perangkat + tab layar
+    var show = el('div', 'karya-show karya-show-' + k.device);
+    var frame = el('div', 'karya-frame karya-frame-' + k.device);
+    if (k.device === 'web') {
+      var bar = el('div', 'karya-bar');
+      bar.innerHTML = '<i></i><i></i><i></i>';
+      frame.appendChild(bar);
+    }
+    var screen = el('div', 'karya-screen');
+    var shot = el('img');
+    shot.alt = 'Tampilan aplikasi ' + k.title;
+    shot.loading = 'lazy';
+    shot.src = k.screens[0].img;
+    shot.addEventListener('error', function () { card.remove(); buildDots(); });
+    screen.appendChild(shot);
+    frame.appendChild(screen);
+    show.appendChild(frame);
 
-    var body = document.createElement('div');
-    body.className = 'karya-body';
-    var tag = document.createElement('span');
-    tag.className = 'karya-tag';
-    tag.textContent = k.tag;
-    var h = document.createElement('h3');
-    h.textContent = k.title;
-    var p = document.createElement('p');
-    p.textContent = k.desc;
-    body.appendChild(tag); body.appendChild(h); body.appendChild(p);
+    if (k.screens.length > 1) {
+      var tabs = el('div', 'karya-tabs');
+      k.screens.forEach(function (s, i) {
+        var b = el('button', 'karya-tab' + (i === 0 ? ' is-on' : ''), s.label);
+        b.type = 'button';
+        b.addEventListener('click', function (e) {
+          e.stopPropagation();
+          shot.src = s.img;
+          tabs.querySelectorAll('.karya-tab').forEach(function (t) { t.classList.remove('is-on'); });
+          b.classList.add('is-on');
+        });
+        tabs.appendChild(b);
+      });
+      show.appendChild(tabs);
+    }
 
-    card.appendChild(shot);
-    card.appendChild(body);
+    // --- sisi kanan: keterangan
+    var info = el('div', 'karya-info');
+    info.appendChild(el('span', 'karya-tag', k.tag));
+    info.appendChild(el('h3', '', k.title));
+    info.appendChild(el('p', 'karya-desc', k.desc));
+    var ul = el('ul', 'karya-feats');
+    k.feats.forEach(function (f) { ul.appendChild(el('li', '', f)); });
+    info.appendChild(ul);
+
+    card.appendChild(show);
+    card.appendChild(info);
     frag.appendChild(card);
   });
   track.appendChild(frag);
@@ -321,6 +389,7 @@ function setupKarya() {
   var down = false, startX = 0, startScroll = 0, moved = false;
   track.addEventListener('pointerdown', function (e) {
     if (e.pointerType === 'touch') return;
+    if (e.target.closest && e.target.closest('.karya-tab')) return;
     down = true; moved = false;
     startX = e.clientX; startScroll = track.scrollLeft;
     track.classList.add('is-dragging');
