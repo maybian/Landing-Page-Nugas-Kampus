@@ -452,14 +452,23 @@ function setupKarya() {
     if (!c) return track.clientWidth;
     var cs = getComputedStyle(track);
     var gap = parseInt(cs.columnGap || cs.gap, 10) || 0;
-    return c.getBoundingClientRect().width + gap;
+    return c.offsetWidth + gap; // offsetWidth: tidak terpengaruh efek scale
   }
   function updateActive() {
     var idx = Math.round(track.scrollLeft / step());
     dotsWrap.querySelectorAll('.testi-dot').forEach(function (d, i) {
       d.classList.toggle('is-active', i === idx);
     });
-    cards().forEach(function (c, i) { c.classList.toggle('is-current', i === idx); });
+    var st = step();
+    cards().forEach(function (c, i) {
+      c.classList.toggle('is-current', i === idx);
+      // efek kartu: menjauh dari tengah = mengecil, memudar, memburam; mendekat = membesar dan jelas
+      var p = Math.min(Math.abs((i * st - track.scrollLeft) / st), 1.4);
+      var a = Math.min(p, 1);
+      c.style.transform = 'scale(' + (1 - 0.14 * a).toFixed(3) + ')';
+      c.style.opacity = (1 - 0.62 * a).toFixed(3);
+      c.style.filter = a < 0.02 ? 'none' : 'blur(' + (6 * a).toFixed(2) + 'px)';
+    });
   }
   function buildDots() {
     dotsWrap.innerHTML = '';
