@@ -359,44 +359,40 @@ function setupKarya() {
     frame.appendChild(screen);
     show.appendChild(frame);
 
-    var tabs = null;
+    // penanda halaman layar (titik), tanpa tulisan
+    var pager = null;
     if (k.screens.length > 1) {
-      tabs = el('div', 'karya-tabs');
+      pager = el('div', 'karya-pager');
       k.screens.forEach(function (s, i) {
-        var b = el('button', 'karya-tab' + (i === 0 ? ' is-on' : ''), s.label);
-        b.type = 'button';
-        b.addEventListener('click', function () {
-          animateScroll(strip, i * strip.clientWidth, 560);
-        });
-        tabs.appendChild(b);
+        var d = el('button', 'karya-pdot' + (i === 0 ? ' is-on' : ''));
+        d.type = 'button';
+        d.setAttribute('aria-label', 'Tampilan ' + (i + 1));
+        d.addEventListener('click', function () { animateScroll(strip, i * strip.clientWidth, 560); });
+        pager.appendChild(d);
       });
-      show.appendChild(tabs);
-      show.appendChild(el('p', 'karya-hint', 'Geser layar untuk melihat tampilan lainnya'));
+      show.appendChild(pager);
     }
 
-    // sinkron tab dengan posisi geser
+    // efek geser: layar yang menjauh sedikit mengecil dan memudar; titik ikut berpindah
     var sraf;
     var lastIdx = -1;
     strip.addEventListener('scroll', function () {
       if (sraf) cancelAnimationFrame(sraf);
       sraf = requestAnimationFrame(function () {
         var w = Math.max(strip.clientWidth, 1);
-        // efek: layar yang menjauh mengecil, memudar, dan bergeser sedikit
         var slides = strip.children;
         for (var s = 0; s < slides.length; s++) {
           var p = (s * w - strip.scrollLeft) / w;
           var ap = Math.min(Math.abs(p), 1);
           var im = slides[s].firstChild;
-          im.style.transform = 'translateX(' + (p * -14).toFixed(2) + '%) scale(' + (1 - 0.1 * ap).toFixed(3) + ')';
-          im.style.opacity = (1 - 0.6 * ap).toFixed(3);
+          im.style.transform = 'scale(' + (1 - 0.06 * ap).toFixed(3) + ')';
+          im.style.opacity = (1 - 0.45 * ap).toFixed(3);
         }
-        if (!tabs) return;
+        if (!pager) return;
         var idx = Math.round(strip.scrollLeft / w);
         if (idx === lastIdx) return;
         lastIdx = idx;
-        var on = null;
-        tabs.querySelectorAll('.karya-tab').forEach(function (t, i) { t.classList.toggle('is-on', i === idx); if (i === idx) on = t; });
-        if (on) animateScroll(tabs, on.offsetLeft - (tabs.clientWidth - on.offsetWidth) / 2, 360);
+        pager.querySelectorAll('.karya-pdot').forEach(function (t, i) { t.classList.toggle('is-on', i === idx); });
       });
     });
 
@@ -463,6 +459,7 @@ function setupKarya() {
     dotsWrap.querySelectorAll('.testi-dot').forEach(function (d, i) {
       d.classList.toggle('is-active', i === idx);
     });
+    cards().forEach(function (c, i) { c.classList.toggle('is-current', i === idx); });
   }
   function buildDots() {
     dotsWrap.innerHTML = '';
