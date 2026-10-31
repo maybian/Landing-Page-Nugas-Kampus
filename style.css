@@ -1696,3 +1696,40 @@ section { position: relative; padding: 70px 0; }
   overflow: hidden;
 }
 .cf-home-visual img { width: 100%; height: auto; display: block; }
+
+/* ============ KARYA ============ */
+.karya { padding: 72px 0; background: #fff; }
+.karya-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 640px) { .karya-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .karya-grid { grid-template-columns: repeat(3, 1fr); } }
+.karya-card {
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  padding: 26px 24px;
+  border: 1px solid rgba(8,8,7,0.06);
+  box-shadow: var(--shadow-soft);
+}
+.karya-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #8a4a00;
+  background: rgba(253,133,0,0.14);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.karya-card h3 { font-size: 1.12rem; margin-bottom: 8px; }
+.karya-card p { font-size: 0.92rem; color: rgba(8,8,7,0.68); }
+.karya-card ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.karya-card li {
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(8,8,7,0.08);
+}
+.karya-note { text-align: center; margin: 36px auto 16px; max-width: 560px; color: rgba(8,8,7,0.7); }
+.karya-cta { text-align: center; }
