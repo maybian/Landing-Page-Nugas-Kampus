@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   setupReveal();
   setupTestimonials();
+  setupKarya();
 });
 
 function setupReveal() {
@@ -219,6 +220,127 @@ function setupTestimonials() {
     if (moved) { e.preventDefault(); e.stopPropagation(); }
   }, true);
 
+  window.addEventListener('resize', function () {
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(updateActive);
+  });
+
+  buildDots();
+}
+
+function setupKarya() {
+  var track = document.getElementById('karyaTrack');
+  if (!track) return;
+
+  // ====== EDIT DI SINI ======
+  // Tiap aplikasi = satu objek. Gambar ditaruh di assets/karya/.
+  var KARYA = [
+    { img: 'assets/karya/simep.webp', tag: 'Pesanan klien', title: 'SIMEP, Monitoring PKL SMK', desc: 'Sistem web pemantau praktik kerja lapangan siswa SMK di Surakarta: data siswa, tempat PKL, jurnal, dan penilaian.' },
+    { img: 'assets/karya/presensi.webp', tag: 'Pesanan klien', title: 'Presensi Guru Digital', desc: 'Guru KB dan TK absen dari ponsel, admin sekolah langsung melihat rekap kehadiran.' },
+    { img: 'assets/karya/kas-masjid.webp', tag: 'Proyek sukarela', title: 'Kas Masjid Kampus', desc: 'Pembukuan kas masjid kampus dengan dua peran akses: takmir mencatat, pengawas hanya melihat.' },
+    { img: 'assets/karya/wallet.webp', tag: 'Aplikasi sendiri', title: 'Wallet, Keuangan Pribadi', desc: 'Aplikasi keuangan bergaya iOS yang bisa dipasang di layar utama ponsel.' },
+    { img: 'assets/karya/nomor-halaman.webp', tag: 'Alat gratis', title: 'Alat Nomor Halaman Skripsi', desc: 'Merapikan penomoran halaman sesuai pedoman kampus, jalan di peramban tanpa mengunggah dokumen.' }
+  ];
+  // ==========================
+
+  var frag = document.createDocumentFragment();
+  KARYA.forEach(function (k) {
+    var card = document.createElement('article');
+    card.className = 'testi-card karya-card';
+    card.setAttribute('role', 'listitem');
+
+    var shot = document.createElement('div');
+    shot.className = 'testi-shot';
+    var img = document.createElement('img');
+    img.src = k.img;
+    img.loading = 'lazy';
+    img.alt = 'Tampilan aplikasi ' + k.title;
+    img.addEventListener('error', function () { card.remove(); buildDots(); });
+    shot.appendChild(img);
+
+    var body = document.createElement('div');
+    body.className = 'karya-body';
+    var tag = document.createElement('span');
+    tag.className = 'karya-tag';
+    tag.textContent = k.tag;
+    var h = document.createElement('h3');
+    h.textContent = k.title;
+    var p = document.createElement('p');
+    p.textContent = k.desc;
+    body.appendChild(tag); body.appendChild(h); body.appendChild(p);
+
+    card.appendChild(shot);
+    card.appendChild(body);
+    frag.appendChild(card);
+  });
+  track.appendChild(frag);
+
+  var dotsWrap = document.getElementById('karyaDots');
+  var slider = track.closest('.testi-slider');
+  var prev = slider.querySelector('.testi-prev');
+  var next = slider.querySelector('.testi-next');
+
+  function cards() { return track.querySelectorAll('.testi-card'); }
+  function step() {
+    var c = track.querySelector('.testi-card');
+    if (!c) return track.clientWidth;
+    var cs = getComputedStyle(track);
+    var gap = parseInt(cs.columnGap || cs.gap, 10) || 0;
+    return c.getBoundingClientRect().width + gap;
+  }
+  function updateActive() {
+    var idx = Math.round(track.scrollLeft / step());
+    dotsWrap.querySelectorAll('.testi-dot').forEach(function (d, i) {
+      d.classList.toggle('is-active', i === idx);
+    });
+  }
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    cards().forEach(function (c, i) {
+      var d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'testi-dot';
+      d.setAttribute('aria-label', 'Ke aplikasi ' + (i + 1));
+      d.addEventListener('click', function () {
+        track.scrollTo({ left: i * step(), behavior: 'smooth' });
+      });
+      dotsWrap.appendChild(d);
+    });
+    updateActive();
+  }
+
+  prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+  next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+
+  var raf;
+  track.addEventListener('scroll', function () {
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(updateActive);
+  });
+
+  var down = false, startX = 0, startScroll = 0, moved = false;
+  track.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'touch') return;
+    down = true; moved = false;
+    startX = e.clientX; startScroll = track.scrollLeft;
+    track.classList.add('is-dragging');
+  });
+  track.addEventListener('pointermove', function (e) {
+    if (!down) return;
+    var dx = e.clientX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startScroll - dx;
+  });
+  function endDrag() {
+    if (!down) return;
+    down = false;
+    track.classList.remove('is-dragging');
+  }
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointerleave', endDrag);
+  track.addEventListener('click', function (e) {
+    if (moved) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
   window.addEventListener('resize', function () {
     if (raf) cancelAnimationFrame(raf);
     raf = requestAnimationFrame(updateActive);

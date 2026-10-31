@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=23">
+<link rel="stylesheet" href="style.css?v=24">
 </head>
 <body>
 
@@ -243,44 +243,16 @@
         <h2>Aplikasi Buatan Nugas Kampus</h2>
         <p class="section-desc">Berawal dari mengerjakan tugas kampus, kini berkembang jadi aplikasi yang benar-benar dipakai: untuk sekolah, masjid kampus, sampai kebutuhan sehari-hari.</p>
       </div>
-      <div class="karya-grid">
-        <article class="karya-card">
-          <span class="karya-tag">Pesanan klien</span>
-          <h3>SIMEP, Monitoring PKL SMK</h3>
-          <p>Sistem web untuk memantau praktik kerja lapangan siswa SMK di Surakarta, dari penempatan, jurnal harian, sampai penilaian. Dibangun atas permintaan klien.</p>
-          <ul><li>Panel admin sekolah</li><li>Jurnal &amp; penilaian</li></ul>
-        </article>
-        <article class="karya-card">
-          <span class="karya-tag">Pesanan klien</span>
-          <h3>Presensi Guru Digital</h3>
-          <p>Aplikasi presensi untuk guru KB dan TK. Guru absen dari ponsel, admin sekolah melihat rekap kehadiran tanpa menghitung manual.</p>
-          <ul><li>Absen masuk &amp; pulang</li><li>Rekap untuk admin</li></ul>
-        </article>
-        <article class="karya-card">
-          <span class="karya-tag">Proyek sukarela</span>
-          <h3>Kas Masjid Kampus</h3>
-          <p>Pembukuan kas untuk masjid kampus. Takmir mencatat, pengawas hanya bisa melihat, dan laporan keuangan siap diekspor.</p>
-          <ul><li>Dua peran akses</li><li>Laporan transparan</li></ul>
-        </article>
-        <article class="karya-card">
-          <span class="karya-tag">Aplikasi sendiri</span>
-          <h3>Wallet, Pembukuan Pribadi</h3>
-          <p>Aplikasi keuangan pribadi bergaya iOS yang bisa dipasang di layar utama ponsel. Catat pemasukan, pengeluaran, dan dana darurat dengan cepat.</p>
-          <ul><li>Dipasang seperti aplikasi</li><li>Tampilan kaca</li></ul>
-        </article>
-        <article class="karya-card">
-          <span class="karya-tag">Alat internal</span>
-          <h3>Pembukuan &amp; Bagi Hasil</h3>
-          <p>Aplikasi pembukuan yang kami pakai sendiri untuk mencatat pemasukan dan membagi hasil otomatis. Dirancang dan dioperasikan oleh tim Nugas Kampus.</p>
-          <ul><li>Saldo kas real-time</li><li>Ekspor Excel</li></ul>
-        </article>
-        <article class="karya-card">
-          <span class="karya-tag">Alat gratis</span>
-          <h3>Alat Nomor Halaman</h3>
-          <p>Alat web untuk merapikan penomoran halaman skripsi sesuai pedoman kampus. Berjalan di peramban, dokumenmu tidak pernah diunggah.</p>
-          <ul><li>Tanpa server</li><li>Gratis dipakai</li></ul>
-        </article>
+      <div class="testi-slider karya-slider">
+        <button class="testi-arrow testi-prev" type="button" aria-label="Aplikasi sebelumnya">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <div class="testi-track" id="karyaTrack" role="list"></div>
+        <button class="testi-arrow testi-next" type="button" aria-label="Aplikasi berikutnya">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
       </div>
+      <div class="testi-dots" id="karyaDots"></div>
       <p class="karya-note">Butuh aplikasi untuk sekolah, organisasi, atau usahamu? Ceritakan kebutuhannya, kami bantu rancang dari awal.</p>
       <div class="karya-cta"><a data-wa-src="home-karya" href="https://wa.me/6282146055941?text=Halo%2C%20saya%20mau%20konsultasi%20pembuatan%20aplikasi%20web" class="btn btn-gold btn-large" target="_blank" rel="noopener">Konsultasi Aplikasi Web</a></div>
     </div>
